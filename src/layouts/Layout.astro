@@ -1,0 +1,102 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+import { ScrollObserver } from 'astro-scroll-observer';
+
+interface Props {
+    title: string;
+    navLocaleUrlEn: string;
+    navLocaleUrlCs: string;
+}
+
+const {
+    title,
+    navLocaleUrlEn,
+    navLocaleUrlCs,
+} = Astro.props;
+---
+
+<script>
+</script>
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Astro description" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <ScrollObserver />
+        <title>{title}</title>
+    </head>
+    <body>
+        <Navbar
+            enLocaleUrl={navLocaleUrlEn}
+            csLocaleUrl={navLocaleUrlCs}
+        />
+        <div class="pageTitle">
+            <h1>{ title }</h1>
+        </div>
+        <slot />
+        <Footer />
+    </body>
+</html>
+<style is:global>
+    :root {
+        --white: #f2f2f2;
+        --dark: lch(26.56% 1.51 216);
+        --mid: lch(35.16% 1.51 216);
+        --light: lch(58.% 4.83 258.35);
+        --gold: lch(82.67% 100.53 81.59);
+        --gold2: lch(77.33% 100.53 81.53);
+        --orange: lch(64.67% 98.6 52.94);
+
+        /* --hsl-dark: hsl(191 3% 24%);
+        --hsl-mid: hsl(190.79 2% 32%);
+        --hsl-light:hsl(214 6% 55%);
+        --hsl-gold: hsl(46.03 100% 50%);
+        --hsl-gold2: hsl(45.93 100% 46%);
+        --hsl-orange: hsl(23.8 100% 53%); */
+        --hsl-dark: #000000;
+        --hsl-mid: #252526;
+        --hsl-light:hsl(214 6% 55%);
+        --hsl-gold: hsl(46.03 100% 50%);
+        --hsl-gold2: hsl(45.93 100% 46%);
+        --hsl-orange: hsl(23.8 100% 53%);
+    }
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    body {
+        background-color: var(--white);
+    }
+    a {
+        color: var(--secondary);
+        cursor: pointer;
+        transition: color 0.25s;<html lang="en"><html lang="en">
+        text-decoration: none;
+    }
+    h1, h2, h3, {
+        color: var(--primary);
+    }
+    b {
+        color: var(--primary);
+    }
+    p {
+        color: var(--secondary);
+    }
+    .pageTitle {
+        margin-top: 50px;
+        width: 100%;
+        text-align: center;
+        font-size: 2rem;
+    }
+    main {
+        min-height: 100dvh;
+    }
+</style>
+<html lang="en"></html>

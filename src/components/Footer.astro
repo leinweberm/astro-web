@@ -1,0 +1,138 @@
+---
+import $t from '../../lib/locales/global';
+import $f from '../../lib/locales/footer';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+
+const astroLocale = Astro.currentLocale;
+const locale = (astroLocale === 'en' || astroLocale === 'cs') ? astroLocale : 'en';
+---
+
+<footer>
+    <!-- contact informations -->
+    <section class="footerSection">
+        <b>{ $t.contact[locale] }</b>
+        <!-- email -->
+        <p>
+            <span>{ $t.email[locale] }: </span>
+            rosemaryphotography@seznam.cz
+        </p>
+        <!-- phone -->
+        <p>
+            <span>{ $t.phone[locale] }: </span>
+            +420 777 888 999
+        </p>
+        <!-- address -->
+        <p>
+            <span>{ $t.address[locale] }: </span>
+            { $f.address[locale] }
+        </p>
+    </section>
+
+    <!-- socials -->
+    <section class="footerSection">
+        <b>{ $t.socials[locale] }</b>
+        <!-- facebook painting -->
+        <p>
+            <span>{ $f.facebookPainting[locale]}: </span>
+            <a
+                href="https://www.facebook.com/profile.php?id=100077482535221"
+                target="_blank"
+                >
+                { $t.open[locale] }
+            </a>
+        </p>
+        <!-- faebook photography -->
+        <p>
+            <span>{ $f.facebookPhotography[locale] }: </span>
+            <a
+                href="https://www.facebook.com/profile.php?id=100063615456667"
+                target="_blank"
+                >
+                { $t.open[locale] }
+            </a>
+        </p>
+        <!-- instagram -->
+        <p>
+            <span>Instagram: </span>
+            <a
+                href="https://www.instagram.com/rozmarynamaluje/"
+                target="_blank"
+            >
+                { $t.open[locale] }
+            </a>
+        </p>
+    </section>
+
+    <!-- pages -->
+    <section class="footerSection">
+        <b>{ $t.pages[locale] }</b>
+        <!-- gallery -->
+        <p>
+            <span>{ $t.gallery[locale ]}: </span>
+            <a href={getRelativeLocaleUrl(locale, '/gallery')}>
+                { $t.view[locale] }
+            </a>
+        </p>
+        <!-- photo -->
+        <p>
+            <span>{ $t.photo[locale] }: </span>
+            <a href={getRelativeLocaleUrl(locale, '/photo')}>
+                { $t.view[locale] }
+            </a>
+        </p>
+        <!-- tattoo -->
+        <p>
+            <span>{ $t.tattoo[locale] }: </span>
+            <a href={getRelativeLocaleUrl(locale, '/tattoo')}>
+                { $t.view[locale] }
+            </a>
+        </p>
+        <!-- blog -->
+        <p>
+            <span>{ $t.blog[locale] }: </span>
+            <a href={getRelativeLocaleUrl(locale, '/blog')}>
+                { $t.view[locale] }
+            </a>
+        </p>
+    </section>
+</footer>
+
+<style>
+footer {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 100px;
+    width: 100%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: var(--hsl-mid);
+    color: var(--white);
+    line-height: 1.5rem;
+}
+
+.footerSection {
+    min-width: 250px;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 20px;
+}
+
+b {
+    color: goldenrod;
+    text-transform: capitalize;
+}
+
+p {
+    text-transform: lowercase;
+}
+
+p > span {
+    font-weight: 700;
+}
+
+p > a:hover {
+    opacity: 0.7;
+}
+</style>
