@@ -8,17 +8,21 @@ interface Props {
     title: string;
     navLocaleUrlEn: string;
     navLocaleUrlCs: string;
+	currentPage: string;
 }
 
 const {
     title,
     navLocaleUrlEn,
     navLocaleUrlCs,
+	currentPage,
 } = Astro.props;
----
 
-<script>
-</script>
+const astroLocale = Astro.currentLocale;
+const locale = astroLocale === 'en' || astroLocale === 'cs' ? astroLocale : 'en';
+const baseUrl = 'www.rosemary-artist.com'
+const pageUrl = `${baseUrl}${locale === 'cs' ? '/cs' : ''}${currentPage}`;
+---
 
 <!doctype html>
 <html lang="en">
@@ -27,14 +31,22 @@ const {
         <meta name="description" content="Astro description" />
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link
+			rel="alternate"
+			hreflang={(locale === 'en') ? 'en-us' : 'cz'}
+			href={pageUrl}
+		/>
         <meta name="generator" content={Astro.generator} />
         <ScrollObserver />
-        <title>{title}</title>
+        <title>{'Rosemary | '} {title}</title>
+		<slot name="page-meta" />
     </head>
     <body>
         <Navbar
             enLocaleUrl={navLocaleUrlEn}
             csLocaleUrl={navLocaleUrlCs}
+			currentPage={currentPage}
+			currentLocale={locale}
         />
         <div class="pageTitle">
             <h1>{ title }</h1>
@@ -52,13 +64,6 @@ const {
         --gold: lch(82.67% 100.53 81.59);
         --gold2: lch(77.33% 100.53 81.53);
         --orange: lch(64.67% 98.6 52.94);
-
-        /* --hsl-dark: hsl(191 3% 24%);
-        --hsl-mid: hsl(190.79 2% 32%);
-        --hsl-light:hsl(214 6% 55%);
-        --hsl-gold: hsl(46.03 100% 50%);
-        --hsl-gold2: hsl(45.93 100% 46%);
-        --hsl-orange: hsl(23.8 100% 53%); */
         --hsl-dark: #000000;
         --hsl-mid: #252526;
         --hsl-light:hsl(214 6% 55%);
@@ -90,13 +95,34 @@ const {
         color: var(--secondary);
     }
     .pageTitle {
-        margin-top: 50px;
+		text-transform: capitalize;
+        margin-top: 80px;
         width: 100%;
         text-align: center;
         font-size: 2rem;
     }
-    main {
-        min-height: 100dvh;
-    }
+	main, section {
+		width: 100%;
+		max-width: 1400px;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		line-height: 1.75rem;
+	}
+	main {
+		align-self: center;
+		color: var(--secondary);
+		font-size: 20px;
+		min-height: 100dvh;
+		margin: auto;
+	}
+
+	section {
+		object-fit: contain;
+		position: relative;
+		margin: 20px;
+		padding: 20px;
+	}
 </style>
 <html lang="en"></html>

@@ -1,4 +1,24 @@
 ---
-import Navbar from '../components/Navbar.astro';
 import Layout from '../layouts/Layout.astro';
 ---
+
+<Layout
+	title="Gallery"
+	navLocaleUrlCs="/gallery"
+	navLocaleUrlEn="/gallery"
+	currentPage="gallery"
+>
+	<main>
+		<section id="listOfPaintings">
+			<div></div>
+			<div class="paintingsList"></div>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.paintingsList {
+		display: flex;
+		flex-wrap: wrap;
+	}
+</style>

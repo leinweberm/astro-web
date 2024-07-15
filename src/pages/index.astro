@@ -5,61 +5,52 @@ import indexImage from '../images/rosemary_opava_tattoo_convention.jpg';
 ---
 
 <Layout
-    title='Rosemary'
-    navLocaleUrlCs='/'
-    navLocaleUrlEn='/'
+	title="Rosemary"
+	navLocaleUrlCs="/"
+	navLocaleUrlEn="/"
+	currentPage="/"
 >
-    <main>
-        <!-- main index image -->
-        <section
-            id='indexImage'
-            aria-label='index image'
-        >
-            <div></div>
-            <Image
-                class='indexImage'
-                src={indexImage}
-                alt='Rosemary profile photo'
-            >
-        </section>
-        <!-- about author -->
-        <section
-            id='#introduction'
-            aria-label='author introduction'
-        >
-            <b>Welcome</b>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos veritatis porro esse nulla id, aliquam, numquam aperiam officiis dolore corrupti rerum laboriosam quidem omnis ut enim nesciunt tempore ab odit!</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia, voluptatum, perspiciatis minus voluptate quaerat eligendi quo quia dolores repellat soluta dignissimos fugiat praesentium, tempore pariatur labore temporibus doloribus quas repellendus.</p>
-        </section>
-        <!-- following images -->
-        <section>
-        </section>
-    </main>
-</Layout>
+	<main>
+		<!-- main index image -->
+		<section>
+			<Image
+				class="indexImage"
+				src={indexImage}
+				alt="Michaela Halásová aka Rosemary profile photo"
+			/>
+		</section>
+		<!-- about author -->
+		<section
+			id="#introduction"
+			aria-label="author introduction"
+		>
+			<b>Welcome</b>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos veritatis porro esse nulla id,
+				aliquam, numquam aperiam officiis dolore corrupti rerum laboriosam quidem omnis ut enim
+				nesciunt tempore ab odit!
+			</p>
+			<p>
+				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia, voluptatum, perspiciatis
+				minus voluptate quaerat eligendi quo quia dolores repellat soluta dignissimos fugiat
+				praesentium, tempore pariatur labore temporibus doloribus quas repellendus.
+			</p>
+		</section>
+		<!-- following images -->
+		<section></section>
+	</main>
 
-<style>
-    main {
-        margin: 20px;
-        color: var(--secondary);
-        font-size: 20px;
-        line-height: 1.6;
-        min-height: 200px;
-    }
-    .indexImage {
-        width: 100%;
-        height: auto;
-    }
-    section {
-        object-fit: contain;
-        position: relative;
-        margin-bottom: 20px;
-        padding: 20px;
-    }
-    #followingImagesWrapper {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        background-color: var(--primary);
-        min-height: 100px;
-    }
-</style>
+	<style>
+		.indexImage {
+			width: 100%;
+			height: auto;
+		}
+		#followingImagesWrapper {
+			width: 100%;
+			display: flex;
+			flex-wrap: wrap;
+			background-color: var(--primary);
+			min-height: 100px;
+		}
+	</style>
+</Layout>

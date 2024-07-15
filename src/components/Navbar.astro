@@ -4,270 +4,272 @@ import { Icon } from 'astro-icon/components';
 import $t from '../../lib/locales/global';
 
 interface Props {
-    enLocaleUrl: string;
-    csLocaleUrl: string;
-    currentPage: string;
+	enLocaleUrl: string;
+	csLocaleUrl: string;
+	currentPage: string;
+	currentLocale: 'en' | 'cs';
 }
 
-const { enLocaleUrl, csLocaleUrl, currentPage } = Astro.props;
-const astroLocale = Astro.currentLocale;
-const locale = (astroLocale === 'en' || astroLocale === 'cs') ? astroLocale : 'en';
+const { enLocaleUrl, csLocaleUrl, currentPage, currentLocale } = Astro.props;
+// const astroLocale = Astro.currentLocale;
+// const locale = astroLocale === 'en' || astroLocale === 'cs' ? astroLocale : 'en';
 ---
+
 <script>
-    const checkbox = document.querySelector('#toggleMenuCheckbox');
-    (checkbox) && checkbox.addEventListener('change', () => {
-        const nav = document.querySelector('#navEl');
-        (nav) && nav.classList.toggle('navTopPosition')
-    });
+	const checkbox = document.querySelector('#toggleMenuCheckbox');
+	checkbox &&
+		checkbox.addEventListener('change', () => {
+			const nav = document.querySelector('#navEl');
+			nav && nav.classList.toggle('navTopPosition');
+		});
 </script>
 
 <nav id="navEl">
-    <a
-        id="logoButton"
-        href={getRelativeLocaleUrl(locale, '/')}
-    >
-        Rosemary
-    </a>
-    <div id="menuLinksWrapper">
-        <a
-            href={getRelativeLocaleUrl(locale, 'gallery')}
-            class:list={['menuLink', { active: (currentPage === 'gallery') }]}
-        >
-            { $t.gallery[locale] }
-        </a>
-        <a
-            href={getRelativeLocaleUrl(locale, 'photo')}
-            class:list={['menuLink', { active: (currentPage === 'photo') }]}
-        >
-            { $t.photo[locale] }
-        </a>
-        <a
-            href={getRelativeLocaleUrl(locale, 'tattoo')}
-            class:list={['menuLink', { active: (currentPage === 'tattoo') }]}
-        >
-            { $t.tattoo[locale] }
-        </a>
-        <a
-            href={getRelativeLocaleUrl(locale, 'blog')}
-            class:list={['menuLink', { active: (currentPage === 'blog') }]}
-        >
-            { $t.blog[locale] }
-        </a>
-    </div>
-    <div id="localeButtons">
-        <a
-            href={getRelativeLocaleUrl('en', enLocaleUrl)}
-            class:list={['localeButton', { active: (locale === 'en')}]}
-        >
-            en
-        </a>
-        <a
-            href={getRelativeLocaleUrl('cs', csLocaleUrl)}
-            class:list={['localeButton', { active: (locale === 'cs')}]}
-        >
-            cs
-        </a>
-    </div>
-    <input
-    type="checkbox"
-    id="toggleMenuCheckbox"
-    autocomplete="off"
-    />
-    <div class="toggleMenuPseudo">
-        <Icon name="mdi:menu"/>
-    </div>
-    <ul id="toggleMenuBody">
-        <li>
-            <a href={getRelativeLocaleUrl(locale, 'gallery')}>
-                { $t.gallery[locale] }
-            </a>
-        </li>
-        <li>
-            <a href={getRelativeLocaleUrl(locale, 'photo')}>
-                { $t.photo[locale] }
-            </a>
-        </li>
-        <li>
-            <a href={getRelativeLocaleUrl(locale, 'tattoo')}>
-                { $t.tattoo[locale] }
-            </a>
-        </li>
-        <li>
-            <a href={getRelativeLocaleUrl(locale, 'blog')}>
-                { $t.blog[locale] }
-            </a>
-        </li>
-    </ul>
+	<a
+		id="logoButton"
+		href={getRelativeLocaleUrl(currentLocale, '/')}
+	>
+		Rosemary
+	</a>
+	<div id="menuLinksWrapper">
+		<a
+			href={getRelativeLocaleUrl(currentLocale, 'gallery')}
+			class:list={['menuLink', { active: currentPage === 'gallery' }]}
+		>
+			{$t.gallery[currentLocale]}
+		</a>
+		<a
+			href={getRelativeLocaleUrl(currentLocale, 'photo')}
+			class:list={['menuLink', { active: currentPage === 'photo' }]}
+		>
+			{$t.photo[currentLocale]}
+		</a>
+		<a
+			href={getRelativeLocaleUrl(currentLocale, 'tattoo')}
+			class:list={['menuLink', { active: currentPage === 'tattoo' }]}
+		>
+			{$t.tattoo[currentLocale]}
+		</a>
+		<a
+			href={getRelativeLocaleUrl(currentLocale, 'blog')}
+			class:list={['menuLink', { active: currentPage === 'blog' }]}
+		>
+			{$t.blog[currentLocale]}
+		</a>
+	</div>
+	<div id="localeButtons">
+		<a
+			href={getRelativeLocaleUrl('en', enLocaleUrl)}
+			class:list={['localeButton', { active: currentLocale === 'en' }]}
+		>
+			en
+		</a>
+		<a
+			href={getRelativeLocaleUrl('cs', csLocaleUrl)}
+			class:list={['localeButton', { active: currentLocale === 'cs' }]}
+		>
+			cs
+		</a>
+	</div>
+	<input
+		type="checkbox"
+		id="toggleMenuCheckbox"
+		autocomplete="off"
+	/>
+	<div class="toggleMenuPseudo">
+		<Icon name="mdi:menu" />
+	</div>
+	<ul id="toggleMenuBody">
+		<li>
+			<a href={getRelativeLocaleUrl(currentLocale, 'gallery')}>
+				{$t.gallery[currentLocale]}
+			</a>
+		</li>
+		<li>
+			<a href={getRelativeLocaleUrl(currentLocale, 'photo')}>
+				{$t.photo[currentLocale]}
+			</a>
+		</li>
+		<li>
+			<a href={getRelativeLocaleUrl(currentLocale, 'tattoo')}>
+				{$t.tattoo[currentLocale]}
+			</a>
+		</li>
+		<li>
+			<a href={getRelativeLocaleUrl(currentLocale, 'blog')}>
+				{$t.blog[currentLocale]}
+			</a>
+		</li>
+	</ul>
 </nav>
 
-
 <style>
-* {
-    box-sizing: border-box;
-}
-nav {
-    align-items: center;
-    background-color: var(--dark);
-    background-color: var(--hsl-dark);
-    color: var(--secondary);
-    display: flex;
-    font-size: 1.5rem;
-    font-weight: 600;
-    height: 50px;
-    justify-content: flex-end;
-    position: fixed;
-    text-align: center;
-    top: -50px;
-    width: 100%;
-    z-index: 3;
-    transition: top 0.25s;
-    container: navbar / inline-size;
-}
+	* {
+		box-sizing: border-box;
+	}
+	nav {
+		align-items: center;
+		background-color: var(--dark);
+		background-color: var(--hsl-dark);
+		color: var(--secondary);
+		display: flex;
+		font-size: 1.5rem;
+		font-weight: 600;
+		height: 50px;
+		justify-content: flex-end;
+		position: fixed;
+		text-align: center;
+		top: -50px;
+		width: 100%;
+		z-index: 3;
+		transition: top 0.25s;
+		container: navbar / inline-size;
+	}
 
-html[data-is-scrolling-up='true'] nav,
-html[data-is-top="true"] nav,
-input[type="checkbox"]:checked nav {
-  top: 0;
-}
+	html[data-is-scrolling-up='true'] nav,
+	html[data-is-top='true'] nav,
+	input[type='checkbox']:checked nav {
+		top: 0;
+	}
 
-.navTopPosition {
-    top: 0 !important;
-}
+	.navTopPosition {
+		top: 0 !important;
+	}
 
-#menuLinksWrapper {
-    display: none;
-    @container navbar (min-width: 800px) {
-        display: flex;
-        flex-direction: row;
-        height: 50px;
-        min-width: 100px;
-        width: auto;
-        align-items: center;
-        justify-content: flex-end;
-        margin-right:20px
-    }
-}
+	#menuLinksWrapper {
+		display: none;
+		@container navbar (min-width: 800px) {
+			display: flex;
+			flex-direction: row;
+			height: 50px;
+			min-width: 100px;
+			width: auto;
+			align-items: center;
+			justify-content: flex-end;
+			margin-right: 20px;
+		}
+	}
 
-.menuLink {
-    font-size: 1.2rem;
-}
+	.menuLink {
+		font-size: 1.2rem;
+	}
 
-.menuLink:hover {
-    opacity: 0.8;
-}
+	.menuLink:hover {
+		opacity: 0.8;
+	}
 
-ul {
-    background-color: var(--hsl-mid);
-    height: 100dvh;
-    padding-bottom: 50px;
-    position: absolute;
-    top: 50px;
-    width: 100%;
-    transform: translateX(+100%);
-    transition: transform 0.4s ease-out;
-    transform-origin: top;
-    z-index: 2;
-}
+	ul {
+		background-color: var(--hsl-mid);
+		height: 100dvh;
+		padding-bottom: 50px;
+		position: absolute;
+		top: 50px;
+		width: 100%;
+		transform: translateX(+100%);
+		transition: transform 0.4s ease-out;
+		transform-origin: top;
+		z-index: 2;
+	}
 
-input[type="checkbox"] {
-    cursor: pointer;
-    height: 30px;
-    opacity: 0;
-    /* position: absolute; */
-    right: 20px;
-    width: 30px;
-    z-index: 5;
-    padding: 0;
-    margin-right: 20px;
-    @container navbar (min-width: 800px) {
-        display: none;
-    }
-}
+	input[type='checkbox'] {
+		cursor: pointer;
+		height: 30px;
+		opacity: 0;
+		/* position: absolute; */
+		right: 20px;
+		width: 30px;
+		z-index: 5;
+		padding: 0;
+		margin-right: 20px;
+		@container navbar (min-width: 800px) {
+			display: none;
+		}
+	}
 
-li {
-    align-items: center;
-    display: flex;
-    font-size: 1.35rem;
-    height: 25%;
-    justify-content: center;
-}
+	li {
+		align-items: center;
+		display: flex;
+		font-size: 1.35rem;
+		height: 25%;
+		justify-content: center;
+	}
 
-input[type="checkbox"]:checked ~ #toggleMenuBody {
-    transform: translateX(0);
-}
+	input[type='checkbox']:checked ~ #toggleMenuBody {
+		transform: translateX(0);
+	}
 
-.toggleMenuPseudo {
-    cursor: pointer;
-    display: flex;
-    height: 30px;
-    width: 30px;
-    position: absolute;
-    right: 20px;
-    padding-bottom: 5px;
-    @container navbar (min-width: 800px) {
-        display: none;
-    }
-}
+	.toggleMenuPseudo {
+		cursor: pointer;
+		display: flex;
+		height: 30px;
+		width: 30px;
+		position: absolute;
+		right: 20px;
+		padding-bottom: 5px;
+		@container navbar (min-width: 800px) {
+			display: none;
+		}
+	}
 
-a {
-    text-decoration: none;
-    text-transform: capitalize;
-    margin: 0 20px;
-    color: var(--white);
-}
+	a {
+		text-decoration: none;
+		text-transform: capitalize;
+		margin: 0 20px;
+		color: var(--white);
+	}
 
-li > a:hover {
-    opacity: 0.7;
-}
+	li > a:hover {
+		opacity: 0.7;
+	}
 
-#localeButtons {
-    margin-right: 20px;
-    padding: 0;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    justify-content: flex-start;
-    height: 30px;
-}
+	#localeButtons {
+		margin-right: 20px;
+		padding: 0;
+		flex-wrap: nowrap;
+		flex-direction: row;
+		justify-content: flex-start;
+		height: 30px;
+	}
 
-.localeButton {
-    margin: 0;
-    height: 30px;
-    font-size: 14px;
-    text-transform: uppercase;
-    padding: 5px;
-    text-align: center;
-    color: var(--white);
-}
+	.localeButton {
+		margin: 0;
+		height: 30px;
+		font-size: 14px;
+		text-transform: uppercase;
+		padding: 5px;
+		text-align: center;
+		color: var(--white);
+	}
 
-.localeButton:hover {
-    opacity: 0.8;
-}
+	.localeButton:hover {
+		opacity: 0.8;
+	}
 
-.localeButton:nth-of-type(1) {
-    border-right: 1px solid var(--white);
-}
+	.localeButton:nth-of-type(1) {
+		border-right: 1px solid var(--white);
+	}
 
-.localeButton:nth-of-type(2) {
-    margin-left: 4px;
-}
+	.localeButton:nth-of-type(2) {
+		margin-left: 4px;
+	}
 
-#logoButton {
-    color: var(--white);
-    position: absolute;
-    left: 20px;
-    margin-bottom: 5px;
-}
+	#logoButton {
+		color: var(--white);
+		position: absolute;
+		left: 20px;
+		margin-bottom: 5px;
+	}
 
-.active {
-    color: goldenrod;
-}
+	.active {
+		color: goldenrod;
+	}
 
-[data-icon] {
-    color: var(--white);
-    height: 32px;
-}
+	[data-icon] {
+		color: var(--white);
+		height: 32px;
+	}
 
-#breadcrumbs {
-    display: none;
-}
+	#breadcrumbs {
+		display: none;
+	}
 </style>
